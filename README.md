@@ -21,6 +21,12 @@ Note the name given must match the name in the files. By default the code perfor
 
 An image should appear on your screen somewhere. Press the save button and save the figure to your preferred file name. By default the code also saves the image data in the form of a numpy array with the name `obj_name_img_array.npy` which can be loaded in with a simple `np.load()` call and plotted using `plt.imshow()`. This can be used for more sophisticated plotting and markups.
 
+![Images_Slices](https://github.com/James11222/colorizer/blob/main/Images/img_slices.png?raw=true)
+
+<p align="center">
+<img src="https://github.com/James11222/colorizer/blob/main/Images/2022crv.png?raw=true" alt="Image Stacked" width="50%"/>
+</p>
+
 
 
 
