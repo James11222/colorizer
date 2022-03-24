@@ -1,6 +1,6 @@
 # Colorizer.py
 
-A python script to stack BVRI image data into a colorized image. This is adapted from code originally written by Yukei Murakami's Repo [fits_quickRGB](https://github.com/SterlingYM/fits_quickRGB). This code is just a semi-automated script version of that code. 
+A python script to stack BVRI image data into a colorized image. This is adapted from code originally written by Yukei Murakami in the Repo: [fits_quickRGB](https://github.com/SterlingYM/fits_quickRGB). This code is just a semi-automated script version of that code. 
 
 ## Basic Usage:
 
@@ -21,15 +21,20 @@ By default the code performs saturation clipping, to avoid this add a command li
 
  `python3 colorizer.py -obj_name 2022crv -noise_level 0.3 -bg_level 0.8 -no_sat_clip True`
 
-An image should appear on your screen somewhere. Press the save button and save the figure to your preferred file name. By default the code also saves the image data in the form of a numpy array with the name `obj_name_img_array.npy` which can be loaded in with a simple `np.load()` call and plotted using `plt.imshow()`. This can be used for more sophisticated plotting and markups. Below are is an example of what the initial input starts as and what the final result is. 
+An image should appear on your screen somewhere. Press the save button and save the figure to your preferred file name. By default the code also saves the image data in the form of a numpy array with the name `obj_name_img_array.npy` which can be loaded in with a simple `np.load()` call and plotted using `plt.imshow()`. This can be used for more sophisticated plotting and markups. Below is an example of what the initial input starts as and what the final result is. 
 
 The sample data is provided by the Filippenko Group at UC Berkeley originally taken by myself and Kingsley Ehrich on the Nickel 1m Telescope at Lick Observatory. 
 
-![Images_Slices](https://github.com/James11222/colorizer/blob/main/Images/img_slices.png?raw=true)
+<p align="center">
+  <img src="Images/img_slices.png#gh-dark-mode-only" width="80%">
+  <img src="Images/img_slices_light.png#gh-light-mode-only" width="80%">
+</p>
 
 <p align="center">
-<img src="https://github.com/James11222/colorizer/blob/main/Images/2022crv.png?raw=true" alt="Image Stacked" width="50%"/>
+  <img src="Images/2022crv.png#gh-dark-mode-only" width="50%">
+  <img src="Images/2022crv_light.png#gh-light-mode-only" width="50%">
 </p>
+
 
 
 
