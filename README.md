@@ -17,11 +17,11 @@ The I filter is not needed for this script. We also note that the naming format 
 
 Note the name given must match the name in the files. 
 
-By default the code performs saturation clipping, to avoid this add a command line argument `-no_sat_clip` and set it to `True`. You can also adjust the noise level threshold and the background level threshold by adding command line arguments `-noise_level` and `-bg_level` which can be floats from 0.0 to 1.0. An example of this is
+By default the code performs saturation clipping, to avoid this add a command line argument `-no_sat_clip` and set it to `True`. You can also adjust the saturation of the image by including the `-sat_factor` variable and setting it to an integer between 1 and 10. 10 will give you the most saturated/exposed image, while 1 will give you the dimmest, 5 is the default. 
 
- `python3 colorizer.py -obj_name 2022crv -noise_level 0.3 -bg_level 0.8 -no_sat_clip True`
+ `python3 colorizer.py -obj_name 2022crv -sat_factor 5 -no_sat_clip True`
 
-An image should appear on your screen somewhere. Press the save button and save the figure to your preferred file name. By default the code also saves the image data in the form of a numpy array with the name `obj_name_img_array.npy` which can be loaded in with a simple `np.load()` call and plotted using `plt.imshow()`. This can be used for more sophisticated plotting and markups. Below is an example of what the initial input starts as and what the final result is. 
+An image should appear in your directory as a saved png file with the name `obj_name.png`. By default the code also saves the image data in the form of a numpy array with the name `obj_name_img_array.npy` which can be loaded in with a simple `np.load()` call and plotted using `plt.imshow()`. This can be used for more sophisticated plotting and markups. Below is an example of what the initial input starts as and what the final result is. 
 
 The sample data is provided by the Filippenko Group at UC Berkeley originally taken by myself and Kingsley Ehrich on the Nickel 1m Telescope at Lick Observatory. 
 
