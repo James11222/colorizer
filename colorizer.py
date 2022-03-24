@@ -27,6 +27,10 @@ parser.add_argument('-bg_level', type=float,
                     help="""upper limit of the background color
                     (e.g. red- and blue- color level when removing green-color noise)
                     Increasing this will remove more noise, but possibly more actual data.""")
+
+parser.add_argument('-sat_factor', type=int,
+                    help="""This number can range from 1 to 10, 10 being the most 
+                    saturated/exposed and 1 being the least. the default is 5.""")
                     
 
 results = parser.parse_args()
@@ -47,6 +51,11 @@ if results.bg_level:
     print('Upper Limit of Background Color = {0}'.format(results.bg_level))
 else:
     results.bg_level=0.8
+    
+if results.sat_factor:
+    print("Saturation Factor is {0}".format(results.sat_factor))
+else:
+    results.sat_factor=5
 
 
 #-----------------------------------------------
@@ -123,7 +132,7 @@ peakB = ((bins[1:]+bins[:-1])/2)[y==y.max()]
 
 
 
-def Generate_Image(R,G,B, noise_level=0.8, bg_level=0.3):
+def Generate_Image(R,G,B, noise_level=0.8, bg_level=0.3, sat_factor=5):
     """
     A function to generate the image from the RGB data.
     
@@ -143,11 +152,13 @@ def Generate_Image(R,G,B, noise_level=0.8, bg_level=0.3):
     # scale_min: 'black' level. This is usually histogram peak + small offset.
     # scale_max: 'white' level. Lowering this will cause more saturation, but will make the image brighter.
     
+    sat_coeff = ((10 - sat_factor) / 10) + 1.5
+    
     
     img = np.zeros((R.shape[0], R.shape[1], 3), dtype=float)
-    img[:,:,0] = img_scale_log(R, scale_min=peakR + 0.01 * peakR, scale_max=2*peakR, no_sat_clip=results.no_sat_clip)
-    img[:,:,1] = img_scale_log(G, scale_min=peakG + 0.01 * peakG, scale_max=2*peakG, no_sat_clip=results.no_sat_clip)
-    img[:,:,2] = img_scale_log(B, scale_min=peakB + 0.01 * peakB, scale_max=2*peakB, no_sat_clip=results.no_sat_clip)
+    img[:,:,0] = img_scale_log(R, scale_min=peakR + 0.01 * peakR, scale_max=sat_coeff*peakR, no_sat_clip=results.no_sat_clip)
+    img[:,:,1] = img_scale_log(G, scale_min=peakG + 0.01 * peakG, scale_max=sat_coeff*peakG, no_sat_clip=results.no_sat_clip)
+    img[:,:,2] = img_scale_log(B, scale_min=peakB + 0.01 * peakB, scale_max=sat_coeff*peakB, no_sat_clip=results.no_sat_clip)
 
 
     # Color noise reduction
@@ -193,12 +204,12 @@ def plot_img(img,obj_name):
     ax.set_xticks([])
     ax.set_yticks([])
     f.tight_layout()
-    plt.show()
-    # plt.savefig(obj_name + '.png',dpi=300, bbox_inches="tight")
+    # plt.show()
+    plt.savefig(obj_name + '.png',dpi=300, bbox_inches="tight")
     
     
 if __name__ == "__main__":
-    full_img = Generate_Image(R,G,B)
+    full_img = Generate_Image(R,G,B, sat_factor=results.sat_factor)
     np.save(results.obj_name + "_img_array.npy", full_img) #save the data in an image array for further plotting!
     plot_img(full_img, results.obj_name)
 
