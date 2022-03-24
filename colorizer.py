@@ -45,12 +45,12 @@ else:
 if results.noise_level:
     print('Lower Limit for Noise = {0}'.format(results.noise_level))
 else:
-    results.noise_level=0.3
+    results.noise_level=0.8
     
 if results.bg_level:
     print('Upper Limit of Background Color = {0}'.format(results.bg_level))
 else:
-    results.bg_level=0.8
+    results.bg_level=0.3
     
 if results.sat_factor:
     print("Saturation Factor is {0}".format(results.sat_factor))
@@ -209,7 +209,7 @@ def plot_img(img,obj_name):
     
     
 if __name__ == "__main__":
-    full_img = Generate_Image(R,G,B, sat_factor=results.sat_factor)
+    full_img = Generate_Image(R,G,B, noise_level=results.noise_level, bg_level=results.bg_level, sat_factor=results.sat_factor)
     np.save(results.obj_name + "_img_array.npy", full_img) #save the data in an image array for further plotting!
     plot_img(full_img, results.obj_name)
 

@@ -21,6 +21,10 @@ By default the code performs saturation clipping, to avoid this add a command li
 
  `python3 colorizer.py -obj_name 2022crv -sat_factor 5 -no_sat_clip True`
 
+One can also add arguments `-noise_level` and `-bg_level` to adjust the lower limit of the noise threshold and the upper limit of the background color threshold. The default `noise_level` is set to `0.8` and the default `bg_level` is set to `0.3`. To add these type the following in the command line: 
+
+`python3 colorizer.py -obj_name 2022crv -sat_factor 5 -no_sat_clip True -noise_level 0.8 -bg_level 0.3`
+
 An image should appear in your directory as a saved png file with the name `obj_name.png`. By default the code also saves the image data in the form of a numpy array with the name `obj_name_img_array.npy` which can be loaded in with a simple `np.load()` call and plotted using `plt.imshow()`. This can be used for more sophisticated plotting and markups. Below is an example of what the initial input starts as and what the final result is. 
 
 The sample data is provided by the Filippenko Group at UC Berkeley originally taken by myself and Kingsley Ehrich on the Nickel 1m Telescope at Lick Observatory. 
